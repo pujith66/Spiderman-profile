@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Peter Parker — Web Developer & Your Friendly Neighborhood Coder. A scroll-driven portfolio swinging through the city." />
+  <title>Peter Parker — Web Developer · Your Friendly Neighborhood Coder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Bowlby+One&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- LOADING SCREEN -->
+  <div class="loader" id="loader">
+    <div class="loader-mask">
+      <div class="loader-eye loader-eye--left"></div>
+      <div class="loader-eye loader-eye--right"></div>
+    </div>
+    <p class="loader-text">SUMMONING THE WEB…</p>
+    <div class="loader-bar"><span></span></div>
+  </div>
+
+  <!-- CURSOR WEB CANVAS -->
+  <canvas id="webCanvas"></canvas>
+  <div class="cursor-dot" id="cursorDot"></div>
+
+  <!-- CURSOR MASK (themed) -->
+  <div class="custom-cursor" id="customCursor"></div>
+
+  <!-- HALFTONE OVERLAY -->
+  <div class="halftone-overlay"></div>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <a href="#hero" class="nav-logo" data-magnetic>
+      <svg viewBox="0 0 40 40" class="logo-svg">
+        <circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M2 20 L38 20 M20 2 L20 38 M6 6 L34 34 M34 6 L6 34" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+        <circle cx="20" cy="20" r="6" fill="currentColor"/>
+      </svg>
+      <span>PP<span class="dot">.</span>DEV</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about" data-text="Origin">Origin</a></li>
+      <li><a href="#powers" data-text="Powers">Powers</a></li>
+      <li><a href="#missions" data-text="Missions">Missions</a></li>
+      <li><a href="#impact" data-text="Impact">Impact</a></li>
+      <li><a href="#contact" data-text="Hire Me" class="nav-cta">Hire Me</a></li>
+    </ul>
+    <div class="nav-burger" id="navBurger">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-bg" data-parallax="0.4">
+      <div class="city-skyline"></div>
+      <div class="moon"></div>
+      <div class="web-pattern"></div>
+    </div>
+
+    <div class="hero-buildings" data-parallax="0.6">
+      <div class="building b1"></div>
+      <div class="building b2"></div>
+      <div class="building b3"></div>
+      <div class="building b4"></div>
+      <div class="building b5"></div>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-tag" data-reveal>
+        <span class="tag-dot"></span>
+        YOUR FRIENDLY NEIGHBORHOOD DEVELOPER
+      </div>
+      <h1 class="hero-title" data-reveal data-reveal-delay="100">
+        <span class="title-line">PETER</span>
+        <span class="title-line title-line--accent">PARKER</span>
+      </h1>
+      <p class="hero-sub" data-reveal data-reveal-delay="200">
+        Web-slinging front-end engineer building interfaces that <em>stick</em>.
+        I swing between pixels and problems — one commit at a time.
+      </p>
+      <div class="hero-cta" data-reveal data-reveal-delay="300">
+        <a href="#missions" class="btn btn-primary" data-magnetic>
+          <span>View Missions</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M5 12h14M13 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <a href="#contact" class="btn btn-ghost" data-magnetic>
+          <span>Send a Web</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Spidey swinging -->
+    <div class="spidey-wrap" data-parallax="0.25">
+      <svg class="web-line" viewBox="0 0 2 800" preserveAspectRatio="none">
+        <line x1="1" y1="0" x2="1" y2="800" stroke="currentColor" stroke-width="1"/>
+      </svg>
+      <svg class="spidey" viewBox="0 0 200 280" id="spideySvg">
+        <!-- Body / suit -->
+        <defs>
+          <linearGradient id="suitGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#e23636"/>
+            <stop offset="1" stop-color="#a41515"/>
+          </linearGradient>
+          <linearGradient id="legGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#1a3a8a"/>
+            <stop offset="1" stop-color="#0d2055"/>
+          </linearGradient>
+        </defs>
+        <!-- Head -->
+        <ellipse cx="100" cy="60" rx="38" ry="42" fill="url(#suitGrad)"/>
+        <!-- Web pattern on head -->
+        <g stroke="#0a0a14" stroke-width="0.8" fill="none" opacity="0.7">
+          <path d="M100 18 L100 102"/>
+          <path d="M62 60 L138 60"/>
+          <path d="M70 28 L130 92"/>
+          <path d="M130 28 L70 92"/>
+          <ellipse cx="100" cy="60" rx="38" ry="42"/>
+        </g>
+        <!-- Eyes -->
+        <path d="M70 55 Q82 40 95 50 Q90 65 75 67 Q68 62 70 55Z" fill="#fff" stroke="#0a0a14" stroke-width="1.5"/>
+        <path d="M105 50 Q118 40 130 55 Q132 62 125 67 Q110 65 105 50Z" fill="#fff" stroke="#0a0a14" stroke-width="1.5"/>
+        <!-- Torso -->
+        <path d="M70 100 Q100 95 130 100 L135 175 Q100 185 65 175 Z" fill="url(#suitGrad)"/>
+        <!-- Web on torso -->
+        <g stroke="#0a0a14" stroke-width="0.8" fill="none" opacity="0.5">
+          <path d="M100 100 L100 180"/>
+          <path d="M65 130 L135 130"/>
+          <path d="M70 105 L130 175"/>
+          <path d="M130 105 L70 175"/>
+        </g>
+        <!-- Spider emblem -->
+        <circle cx="100" cy="135" r="10" fill="#0a0a14"/>
+        <path d="M100 125 L100 145 M90 135 L110 135 M93 128 L107 142 M107 128 L93 142" stroke="#fff" stroke-width="1.2"/>
+        <!-- Left arm (raised) -->
+        <path d="M72 105 Q40 60 50 25 L62 30 Q55 60 80 110 Z" fill="url(#suitGrad)"/>
+        <!-- Right arm -->
+        <path d="M128 105 Q165 130 175 165 L162 172 Q150 140 120 115 Z" fill="url(#suitGrad)"/>
+        <!-- Legs -->
+        <path d="M85 175 Q70 220 60 270 L80 275 Q90 220 95 180 Z" fill="url(#legGrad)"/>
+        <path d="M115 175 Q135 230 145 270 L125 275 Q110 220 105 180 Z" fill="url(#legGrad)"/>
+        <!-- Web pattern on legs -->
+        <g stroke="#0a0a14" stroke-width="0.6" fill="none" opacity="0.5">
+          <path d="M70 200 L90 200 M65 230 L95 230"/>
+          <path d="M115 200 L135 200 M110 230 L140 230"/>
+        </g>
+        <!-- Boots -->
+        <ellipse cx="70" cy="272" rx="14" ry="6" fill="#0a0a14"/>
+        <ellipse cx="135" cy="272" rx="14" ry="6" fill="#0a0a14"/>
+      </svg>
+    </div>
+
+    <a href="#about" class="scroll-indicator" data-reveal data-reveal-delay="500">
+      <span>SCROLL</span>
+      <div class="scroll-line"><span></span></div>
+    </a>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>★ FRONT-END ENGINEER</span>
+      <span>★ UI/UX ENTHUSIAST</span>
+      <span>★ OPEN SOURCE CONTRIBUTOR</span>
+      <span>★ RESPONSIVE DESIGN NINJA</span>
+      <span>★ WEB PERFORMANCE FREAK</span>
+      <span>★ FRONT-END ENGINEER</span>
+      <span>★ UI/UX ENTHUSIAST</span>
+      <span>★ OPEN SOURCE CONTRIBUTOR</span>
+      <span>★ RESPONSIVE DESIGN NINJA</span>
+      <span>★ WEB PERFORMANCE FREAK</span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="section about" id="about">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <span class="section-eyebrow">// 01 — ORIGIN STORY</span>
+        <h2 class="section-title">From a Bite to <span class="ink">Great Power.</span></h2>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-visual" data-reveal data-reveal-delay="100">
+          <div class="about-frame">
+            <div class="frame-corner tl"></div>
+            <div class="frame-corner tr"></div>
+            <div class="frame-corner bl"></div>
+            <div class="frame-corner br"></div>
+            <div class="frame-img">
+              <div class="halftone-dots"></div>
+              <div class="img-overlay">
+                <svg viewBox="0 0 200 200" class="mask-svg">
+                  <defs>
+                    <linearGradient id="maskGrad" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0" stop-color="#e23636"/>
+                      <stop offset="1" stop-color="#7a0e0e"/>
+                    </linearGradient>
+                  </defs>
+                  <ellipse cx="100" cy="100" rx="85" ry="95" fill="url(#maskGrad)"/>
+                  <g stroke="#0a0a14" stroke-width="2" fill="none" opacity="0.7">
+                    <path d="M100 5 L100 195"/>
+                    <path d="M15 100 L185 100"/>
+                    <path d="M35 30 L165 170"/>
+                    <path d="M165 30 L35 170"/>
+                    <ellipse cx="100" cy="100" rx="85" ry="95"/>
+                  </g>
+                  <path d="M50 90 Q70 65 95 80 Q85 110 60 112 Q48 105 50 90Z" fill="#fff" stroke="#0a0a14" stroke-width="2.5"/>
+                  <path d="M105 80 Q130 65 150 90 Q152 105 140 112 Q115 110 105 80Z" fill="#fff" stroke="#0a0a14" stroke-width="2.5"/>
+                </svg>
+              </div>
+              <div class="img-tag">FILE_001 · PETER P.</div>
+            </div>
+          </div>
+          <div class="about-stats-mini">
+            <div><strong data-count="8">0</strong><span>YRS SWINGING</span></div>
+            <div><strong data-count="120">0</strong><span>SHIPPED PROJECTS</span></div>
+            <div><strong data-count="42">0</strong><span>OPEN SOURCE</span></div>
+          </div>
+        </div>
+
+        <div class="about-text" data-reveal data-reveal-delay="200">
+          <p class="lede">
+            <span class="drop-cap">B</span>itten by a radioactive CSS bug, I gained the proportional strength of an unreasonable front-end engineer. By day I'm <em>Peter Parker</em>, building interfaces for the Daily Bugle and a handful of stealth-mode startups. By night, I swing through the city of <strong>Web Components</strong>, fighting jank one re-render at a time.
+          </p>
+          <p>
+            My stack? A web-shooter rig of <strong>React</strong>, <strong>TypeScript</strong>, and <strong>WebGL</strong> — accurate, snappy, and bundled for a quick escape. I'm obsessive about performance, accessibility, and the small touches that make a page feel alive.
+          </p>
+          <ul class="about-list">
+            <li><span class="check">✓</span> Pixel-perfect, accessible interfaces</li>
+            <li><span class="check">✓</span> Motion design that respects users</li>
+            <li><span class="check">✓</span> Pragmatic, shipping-first mindset</li>
+            <li><span class="check">✓</span> Available for contract + consulting</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary" data-magnetic>
+            <span>Work With Me</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M5 12h14M13 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POWERS / SKILLS -->
+  <section class="section powers" id="powers">
+    <div class="powers-bg" data-parallax="0.3"></div>
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <span class="section-eyebrow">// 02 — POWERS & ABILITIES</span>
+        <h2 class="section-title">My <span class="ink">Web-Shooter</span> Toolkit</h2>
+        <p class="section-sub">Every line of code, a strand of web. Here's what I sling on the daily.</p>
+      </div>
+
+      <div class="powers-grid">
+        <article class="power-card" data-reveal data-reveal-delay="50">
+          <div class="power-num">01</div>
+          <div class="power-icon">
+            <svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M10 50 L10 20 L20 20 L30 10 L40 20 L50 20 L50 50 Z"/>
+              <path d="M10 50 L50 50"/>
+              <circle cx="30" cy="32" r="6"/>
+            </svg>
+          </div>
+          <h3>Front-End Engineering</h3>
+          <p>React, Next.js, Vue, Svelte. Architecting scalable UIs with performance budgets in mind.</p>
+          <div class="power-bar"><span data-fill="95"></span></div>
+          <span class="power-level">LVL 95</span>
+        </article>
+
+        <article class="power-card" data-reveal data-reveal-delay="100">
+          <div class="power-num">02</div>
+          <div class="power-icon">
+            <svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="8" y="12" width="44" height="36" rx="3"/>
+              <path d="M8 22 L52 22"/>
+              <circle cx="15" cy="17" r="1.5" fill="currentColor"/>
+              <circle cx="20" cy="17" r="1.5" fill="currentColor"/>
+              <path d="M15 30 L30 30 M15 36 L40 36 M15 42 L25 42"/>
+            </svg>
+          </div>
+          <h3>UI / UX Design</h3>
+          <p>Figma-led design systems, motion choreography, and prototypes that ship — not just sit in a folder.</p>
+          <div class="power-bar"><span data-fill="88"></span></div>
+          <span class="power-level">LVL 88</span>
+        </article>
+
+        <article class="power-card" data-reveal data-reveal-delay="150">
+          <div class="power-num">03</div>
+          <div class="power-icon">
+            <svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="30" cy="30" r="20"/>
+              <path d="M30 10 L30 30 L42 38"/>
+              <path d="M10 30 L50 30 M30 10 L30 50"/>
+            </svg>
+          </div>
+          <h3>WebGL & Motion</h3>
+          <p>Three.js, GLSL shaders, and scroll-driven canvas work. Interfaces that move, breathe, and react.</p>
+          <div class="power-bar"><span data-fill="82"></span></div>
+          <span class="power-level">LVL 82</span>
+        </article>
+
+        <article class="power-card" data-reveal data-reveal-delay="200">
+          <div class="power-num">04</div>
+          <div class="power-icon">
+            <svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M30 5 L30 15 M30 45 L30 55 M5 30 L15 30 M45 30 L55 30"/>
+              <circle cx="30" cy="30" r="15"/>
+              <circle cx="30" cy="30" r="7"/>
+              <path d="M22 22 L38 38 M38 22 L22 38"/>
+            </svg>
+          </div>
+          <h3>Backend & APIs</h3>
+          <p>Node, GraphQL, tRPC, Postgres. Building the glue so the front-end doesn't have to wait on Slack.</p>
+          <div class="power-bar"><span data-fill="78"></span></div>
+          <span class="power-level">LVL 78</span>
+        </article>
+
+        <article class="power-card" data-reveal data-reveal-delay="250">
+          <div class="power-num">05</div>
+          <div class="power-icon">
+            <svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M30 8 L48 18 L48 38 L30 50 L12 38 L12 18 Z"/>
+              <path d="M30 8 L30 50 M12 18 L48 38 M48 18 L12 38"/>
+            </svg>
+          </div>
+          <h3>DevOps & Edge</h3>
+          <p>Vercel, Cloudflare Workers, GitHub Actions. Shipping to the edge so your users don't have to wait.</p>
+          <div class="power-bar"><span data-fill="75"></span></div>
+          <span class="power-level">LVL 75</span>
+        </article>
+
+        <article class="power-card" data-reveal data-reveal-delay="300">
+          <div class="power-num">06</div>
+          <div class="power-icon">
+            <svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M8 20 Q30 5 52 20 Q30 35 8 20 Z"/>
+              <path d="M8 30 Q30 15 52 30 Q30 45 8 30 Z"/>
+              <path d="M8 40 Q30 25 52 40 Q30 55 8 40 Z"/>
+            </svg>
+          </div>
+          <h3>Performance & A11y</h3>
+          <p>Core Web Vitals obsessive. Lighthouse scores that would make Aunt May proud. WCAG or it didn't happen.</p>
+          <div class="power-bar"><span data-fill="92"></span></div>
+          <span class="power-level">LVL 92</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSIONS / PROJECTS -->
+  <section class="section missions" id="missions">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <span class="section-eyebrow">// 03 — MISSION LOG</span>
+        <h2 class="section-title">Recent <span class="ink">Saves.</span></h2>
+        <p class="section-sub">A few cases the city threw at me. All shipped, all standing.</p>
+      </div>
+
+      <div class="missions-grid">
+        <article class="mission-card mission-card--lg" data-reveal data-reveal-delay="50">
+          <div class="mission-cover mc-1">
+            <div class="mission-number">CASE #001</div>
+            <div class="mission-shapes">
+              <div></div><div></div><div></div>
+            </div>
+          </div>
+          <div class="mission-body">
+            <span class="mission-tag">WEB PLATFORM</span>
+            <h3>Daily Bugle 2.0</h3>
+            <p>A full editorial CMS rebuild with real-time collaboration. 4× faster than the old site, twice as many bylines.</p>
+            <div class="mission-meta">
+              <span>Next.js</span><span>tRPC</span><span>Postgres</span><span>Vercel</span>
+            </div>
+            <a href="#" class="mission-link" data-magnetic>
+              Read Case File
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M7 17 L17 7 M9 7 L17 7 L17 15"/>
+              </svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="mission-card" data-reveal data-reveal-delay="100">
+          <div class="mission-cover mc-2">
+            <div class="mission-number">CASE #002</div>
+          </div>
+          <div class="mission-body">
+            <span class="mission-tag">DESIGN SYSTEM</span>
+            <h3>Stark Industries UI Kit</h3>
+            <p>120-component design system, dark mode-first, used across 14 product teams.</p>
+            <div class="mission-meta">
+              <span>Figma</span><span>React</span><span>Storybook</span>
+            </div>
+            <a href="#" class="mission-link" data-magnetic>Read Case File <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17 L17 7 M9 7 L17 7 L17 15"/></svg></a>
+          </div>
+        </article>
+
+        <article class="mission-card" data-reveal data-reveal-delay="150">
+          <div class="mission-cover mc-3">
+            <div class="mission-number">CASE #003</div>
+          </div>
+          <div class="mission-body">
+            <span class="mission-tag">WEBGL / 3D</span>
+            <h3>Oscorp Lab Visualizer</h3>
+            <p>Real-time molecular viewer running 200k atoms in the browser at 60fps.</p>
+            <div class="mission-meta">
+              <span>Three.js</span><span>WebGL</span><span>Rust/WASM</span>
+            </div>
+            <a href="#" class="mission-link" data-magnetic>Read Case File <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17 L17 7 M9 7 L17 7 L17 15"/></svg></a>
+          </div>
+        </article>
+
+        <article class="mission-card" data-reveal data-reveal-delay="200">
+          <div class="mission-cover mc-4">
+            <div class="mission-number">CASE #004</div>
+          </div>
+          <div class="mission-body">
+            <span class="mission-tag">E-COMMERCE</span>
+            <h3>Empire Checkout</h3>
+            <p>Headless Shopify store with custom 3D product viewer. +38% conversion.</p>
+            <div class="mission-meta">
+              <span>Remix</span><span>Three.js</span><span>Stripe</span>
+            </div>
+            <a href="#" class="mission-link" data-magnetic>Read Case File <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17 L17 7 M9 7 L17 7 L17 15"/></svg></a>
+          </div>
+        </article>
+
+        <article class="mission-card mission-card--wide" data-reveal data-reveal-delay="250">
+          <div class="mission-cover mc-5">
+            <div class="mission-number">CASE #005</div>
+          </div>
+          <div class="mission-body">
+            <span class="mission-tag">OPEN SOURCE</span>
+            <h3>react-web-shooter</h3>
+            <p>A tiny (~1.5kb) zero-dep hook for adding cursor trails and pointer parallax to any React app. 12k stars on GitHub and climbing.</p>
+            <div class="mission-meta">
+              <span>TypeScript</span><span>MIT</span><span>12k ★</span>
+            </div>
+            <a href="#" class="mission-link" data-magnetic>Read Case File <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17 L17 7 M9 7 L17 7 L17 15"/></svg></a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- IMPACT / STATS -->
+  <section class="section impact" id="impact">
+    <div class="impact-bg" data-parallax="0.4"></div>
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <span class="section-eyebrow">// 04 — IMPACT REPORT</span>
+        <h2 class="section-title">Numbers from the <span class="ink">Roof-tops.</span></h2>
+      </div>
+
+      <div class="impact-grid">
+        <div class="impact-stat" data-reveal>
+          <div class="stat-num" data-count="8">0</div>
+          <div class="stat-label">Years of swinging the web</div>
+        </div>
+        <div class="impact-stat" data-reveal data-reveal-delay="100">
+          <div class="stat-num" data-count="120">0</div>
+          <div class="stat-label">Projects shipped & alive</div>
+        </div>
+        <div class="impact-stat" data-reveal data-reveal-delay="200">
+          <div class="stat-num" data-count="42">0</div>
+          <div class="stat-label">Open source contributions</div>
+        </div>
+        <div class="impact-stat" data-reveal data-reveal-delay="300">
+          <div class="stat-num" data-count="98">0</div>
+          <div class="stat-label">Avg Lighthouse score</div>
+        </div>
+      </div>
+
+      <div class="testimonials" data-reveal>
+        <div class="testimonial">
+          <div class="quote">"</div>
+          <p>Parker ships faster than my hot takes. Hired him twice, would hire him twice more if Mary Jane didn't keep stealing him for Vogue covers.</p>
+          <div class="author">
+            <strong>J. Jonah Jameson</strong>
+            <span>Editor-in-Chief, Daily Bugle</span>
+          </div>
+        </div>
+        <div class="testimonial">
+          <div class="quote">"</div>
+          <p>He rebuilt our design system in a single sprint and somehow made the engineering team <em>thank</em> the design team. Sorcery.</p>
+          <div class="author">
+            <strong>Pepper Potts</strong>
+            <span>COO, Stark Industries</span>
+          </div>
+        </div>
+        <div class="testimonial">
+          <div class="quote">"</div>
+          <p>Three.js wizardry, real-world deadlines, no excuses. The kind of collaborator you want on every mission.</p>
+          <div class="author">
+            <strong>Stephen Strange</strong>
+            <span>Lead, Sanctum Tech</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section contact" id="contact">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <span class="section-eyebrow">// 05 — OPEN CHANNEL</span>
+        <h2 class="section-title">Send a <span class="ink">Web.</span></h2>
+        <p class="section-sub">Got a project, a vision, or a city to save? Shoot me a message — I always swing back.</p>
+      </div>
+
+      <div class="contact-grid">
+        <form class="contact-form" data-reveal data-reveal-delay="100" onsubmit="event.preventDefault(); this.querySelector('.form-success').classList.add('show'); this.reset();">
+          <div class="form-row">
+            <div class="form-field">
+              <label>Your Name</label>
+              <input type="text" required placeholder="Mary Jane Watson" />
+            </div>
+            <div class="form-field">
+              <label>Your Email</label>
+              <input type="email" required placeholder="mj@bugle.com" />
+            </div>
+          </div>
+          <div class="form-field">
+            <label>Project Type</label>
+            <select required>
+              <option value="">— Pick one —</option>
+              <option>Web Platform / App</option>
+              <option>Design System</option>
+              <option>WebGL / 3D</option>
+              <option>Performance Rescue</option>
+              <option>Just saying hi</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label>Tell me about it</label>
+            <textarea required rows="5" placeholder="A radioactive spider bit your team and now your app is jank? I can help."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg" data-magnetic>
+            <span>SHOOT THE WEB</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M5 12h14M13 5l7 7-7 7"/>
+            </svg>
+          </button>
+          <div class="form-success">THWIP! Message sent. I'll swing back within 24h.</div>
+        </form>
+
+        <aside class="contact-aside" data-reveal data-reveal-delay="200">
+          <div class="aside-block">
+            <h4>Direct Lines</h4>
+            <a href="mailto:peter@parker.dev" class="aside-link" data-magnetic>
+              <span class="aside-icon">@</span>
+              peter@parker.dev
+            </a>
+            <a href="#" class="aside-link" data-magnetic>
+              <span class="aside-icon">#</span>
+              github.com/parker
+            </a>
+            <a href="#" class="aside-link" data-magnetic>
+              <span class="aside-icon">in</span>
+              linkedin.com/in/parker
+            </a>
+          </div>
+          <div class="aside-block">
+            <h4>Currently</h4>
+            <div class="status-pill">
+              <span class="status-dot"></span>
+              Open to interesting work
+            </div>
+            <p class="aside-note">Booking projects for Q3-Q4 2026. Two slots left.</p>
+          </div>
+          <div class="aside-block aside-block--secret">
+            <h4>Secret HQ</h4>
+            <p>20 Ingram Street<br/>Forest Hills, Queens, NY<br/>🕷 Knock 3 times, wait 5</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-web"></div>
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <svg viewBox="0 0 60 60" class="footer-mask">
+            <ellipse cx="30" cy="30" rx="26" ry="28" fill="#e23636"/>
+            <g stroke="#0a0a14" stroke-width="1" fill="none" opacity="0.7">
+              <path d="M30 2 L30 58 M2 30 L58 30 M10 10 L50 50 M50 10 L10 50"/>
+              <ellipse cx="30" cy="30" rx="26" ry="28"/>
+            </g>
+            <path d="M15 26 Q22 16 30 21 Q26 30 18 31 Q14 28 15 26Z" fill="#fff" stroke="#0a0a14" stroke-width="1.2"/>
+            <path d="M30 21 Q38 16 45 26 Q46 30 42 31 Q34 30 30 21Z" fill="#fff" stroke="#0a0a14" stroke-width="1.2"/>
+          </svg>
+          <div>
+            <h3>Peter Parker</h3>
+            <p>Web Developer · Your Friendly Neighborhood Coder</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h5>SITEMAP</h5>
+          <a href="#about">Origin</a>
+          <a href="#powers">Powers</a>
+          <a href="#missions">Missions</a>
+          <a href="#impact">Impact</a>
+        </div>
+        <div>
+          <h5>ELSEWHERE</h5>
+          <a href="#">GitHub</a>
+          <a href="#">X / Twitter</a>
+          <a href="#">Read.cv</a>
+          <a href="#">Dribbble</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span>© 2026 Peter Parker — Built with ❤️, ☕, and way too much CSS.</span>
+      <span class="footer-thwip">THWIP</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
